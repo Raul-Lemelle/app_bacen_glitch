@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - PIPEFY_TOKEN=${PIPEFY_TOKEN}
+      - G_GED_TOKEN=${G_GED_TOKEN}
+      - G_GED_URL=${G_GED_URL}

@@ -1,0 +1,1 @@
+# autoriza_consulta_bacen_pontte_v1

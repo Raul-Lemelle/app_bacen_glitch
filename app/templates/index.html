@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termo de Aceite - Consulta BACEN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="header">
+    <img alt="Company Logo" class="logo" src="{{ url_for('static', filename='logo_full.png') }}">
+    <h1>Termo de Aceite - Consulta BACEN</h1>
+  </div>
+  <div class="container">
+    <div class="content">
+      <h1>Olá, {{ nome_cliente }}</h1>
+      <p>
+        Para prosseguirmos com sua proposta de crédito pessoal com garantia de imóvel ou automóvel, precisamos neste momento de sua autorização para consultarmos seus dados junto ao BACEN.
+      </p>
+      <p>
+        Para aceitar, por favor leia atentamente os termos de autorização abaixo e confirme seus dados para autorizar a consulta do seu CPF junto ao BACEN.
+      </p>
+      <h2>Termo de Autorização de Consulta</h2>
+      <div class="terms">
+        <p><strong>Proposta de crédito pessoal com garantia de imóvel ou automóvel</strong></p>
+        <p>O(s) Proponentes declara(m), sob as penas da Lei, que:</p>
+        <ul>
+            <li>
+                As informações inseridas nesta proposta expressam a verdade e poderão ser comprovadas por documentos, 
+                se forem solicitados;
+            </li>
+            <li>
+                Estão cientes que os recursos de empréstimo não estão sujeitos a atualização monetária e sua liberação 
+                ocorrerá no prazo de até 5 dias úteis após o recebimento da comprovação do registro da alienação 
+                fiduciária a favor da Galapagos Capital;
+            </li>
+            <li>
+                Fica expressamente autorizado à Galapagos Capital, ZZZZZ e/ou suas subsidiárias e controladas a:
+                <ul>
+                    <li>Confeccionar o cadastro com a atualização periódica;</li>
+                    <li>Consultar os dados do(s) Proponentes(s) junto aos órgãos de proteção ao crédito, incluindo, sem limitação, SPC e SERASA;</li>
+                    <li>Contatar o(s) Proponente(s) por meio de cartas, e-mails, SMS, WhatsApp e telefone acerca das informações relevantes do processo de contratação de empréstimo com crédito pessoal com garantia de imóvel ou automóvel.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Proposta de crédito pessoal com garantia de imóvel ou automóvel pelo presente Termo de Autorização para Consulta e Registro de Dados no Sistema de Informações de Crédito-SCR, gerido pelo Banco Central do Brasil:</strong></p>
+        <ol>
+            <li>
+                O(s) Cliente(s), em caráter irrevogável, irretratável e independentemente de autorizações posteriores á presente, autoriza expressamente a BMP MoneyPlus Sociedade de Crédito Direto S.A. instituição financeira inscrita no CNPJ/MF sob o nº 34.337.707/0001-00, a consultar as minhas informações que constem ou venham a constar do Sistema de Informações de Crédito (SCR), gerido pelo Banco Central do Brasil (Bacen) ou de sistemas que venham a complementá-lo ou a substituí-lo, em conformidade com as disposições contidas na Resolução nº 4571/2017 do Conselho Monetário Nacional e da Circular 3870/2017, emitida pelo Bacen, dentre outras normas.
+            </li>
+            <li>
+                O(s) Cliente(s) autoriza(m) que o BMP MoneyPlus consulte as informações pertinentes referente a(s) pessoa(s) jurídica(s) vinculada(s) ao CPF do Cliente, caso houver, sendo vedada a sua divulgação a terceiros.
+            </li>
+            <li>
+                O(s) Cliente(s) desde já autoriza(m) e concorda(m) que o BMP MoneyPlus, na hipótese de vir a ser realizada operação que exija a atuação no SCR, a proceder com os registros dos dados necessários, bem como da(s) pessoa(s) acima indicada(s) em conformidade com o que determina a regulamentação aplicável.
+            </li>
+            <li>
+                O(s) Cliente(s) declara(m) que foi(ram) devidamente cientificado(s) pelo BMP MoneyPlus de que:
+                <ul>
+                    <li>Ao fornecer informações ao Bacen para fins de supervisão do risco de crédito a que estão expostas as instituições elencadas na Res. 3658/08 e propiciar o intercâmbio de informações entre essas instituições com o objetivo de subsidiar as decisões de crédito e de negócios.</li>
+                    <li>Podem ter acesso aos dados constantes no SCR por meio da Central de Atendimento ao Público do Bacen.</li>
+                    <li>Pedidos de correções, exclusões e manifestações de discordância quanto às informações constantes do SCR deverão ser dirigidos ao Bacen ou à instituição responsável pela remessa das informações, por meio de requerimento escrito e fundamentado, ou, quando for o caso, pela respectiva decisão judicial.</li>
+                    <li>
+                        Mais informações sobre o SCR podem ser obtidas em consulta à página na internet do Bacen 
+                        (<a href="https://www.bcb.gov.br/?SCR" target="_blank">www.bcb.gov.br/?SCR</a>).
+                    </li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+      <form action="{{ url_for('autorizar_consulta') }}" method="POST">
+        <input type="hidden" name="card_id" value="{{ card_id }}">
+        <input type="hidden" name="nome_cliente" value="{{ nome_cliente }}">
+        <input type="hidden" name="cpf_cliente" value="{{ cpf_cliente }}">
+        <div class="form-group">
+          <input id="agree" type="checkbox" name="agree" required>
+          <label class="checkbox-label" for="agree">Declaro que li e estou ciente com o termo de autorização.</label>
+        </div>
+        <div class="form-group">
+            <h2>Confirme seus dados abaixo:</h2>
+            <h3>Nome Completo: {{ nome_cliente }}</h3>            
+          </div>
+          <div class="form-group">
+            <label for="cpf">Digite seu CPF:</label>
+            <input id="cpf" name="cpf" placeholder="CPF" type="text">
+            <button class="submit-btn" id="validate-cpf-btn">Validar CPF</button>
+          </div>
+          <div id="message-box" style="display: none;"></div>
+          <span id="stored-cpf" style="display: none;">{{ cpf_cliente }}</span>
+        <br>  
+        <div class="form-group">
+          <input id="option1" name="option1" type="checkbox">
+          <label class="checkbox-label" for="option1">Autorizo a ZZZZZ a usar meus dados para perfilização de seus clientes.</label>
+        </div>
+        <div class="form-group">
+          <input id="option2" name="option2" type="checkbox">
+          <label class="checkbox-label" for="option2">Autorizo a ZZZZZ a usar meus dados para boletins informativos, campanhas de marketing, notícias e outros comunicados.</label>
+        </div>
+        <div class="form-group">
+          <input id="option3" name="option3" type="checkbox">
+          <label class="checkbox-label" for="option3">Autorizo a ZZZZZ a guardar meus dados.</label>
+        </div>
+        <div class="form-group">
+          <button class="submit-btn" type="submit">Autorizar Consulta BACEN</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2024 Galapagos Capital</p>
+  </footer>
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
